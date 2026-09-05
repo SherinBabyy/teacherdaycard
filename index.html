@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Happy Teacher's Day ❤️</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <main class="scene">
+
+    <div class="card-wrapper">
+
+      <!-- =====================================
+           FRONT COVER
+      ====================================== -->
+
+      <div class="front-card" id="frontCard">
+
+        <!-- Decorations -->
+        <div class="doodle star star-1">✦</div>
+        <div class="doodle star star-2">✦</div>
+        <div class="doodle heart heart-1">♥</div>
+        <div class="doodle heart heart-2">♥</div>
+
+        <div class="small-text">
+          A little something for...
+        </div>
+
+        <h1>
+          Happy<br>
+          Teacher's Day!
+        </h1>
+
+        <!-- Your image -->
+        <div class="hug">
+          <img src="./assets/hug.png" alt="">
+        </div>
+
+        <h2>to my favourite</h2>
+
+        <h2>
+          Thomas Sir ❤️
+        </h2>
+
+        <div class="divider"></div>
+
+        <button class="open-btn" id="openBtn">
+          Open Card
+          <span>→</span>
+        </button>
+
+        <div class="tiny-note">
+          made with a little love ♡
+        </div>
+
+      </div>
+
+
+      <!-- =====================================
+           INSIDE LEFT PAGE
+      ====================================== -->
+
+      <div class="inside-card">
+
+        <section class="inside-page left-page">
+
+          <div class="page-decoration left-star">✦</div>
+
+          <p class="headline">
+            According to<br>
+            my calculations…
+            <span class="heart-pop">❤</span>
+          </p>
+
+          <div class="left-content">
+
+            <div class="lines">
+              you're the<br>
+              cutest robotics<br>
+              teacher ever!
+              <span class="heart-inline">❤</span>
+            </div>
+
+            <div class="math-col">
+              <div class="math">
+                √x<br>
+                2 + 2 = 4<br>
+                π ≈ 3.14
+              </div>
+            </div>
+
+          </div>
+
+          <img
+            src="./assets/robot.png"
+            alt="Cute robot"
+            class="robot"
+          >
+
+          <div class="left-bottom">
+            <span>Robotics ✓</span>
+            <span>Teaching ✓</span>
+            <span>Cutest ✓</span>
+          </div>
+
+        </section>
+
+
+        <!-- =====================================
+             INSIDE RIGHT PAGE
+        ====================================== -->
+
+        <section class="inside-page right-page">
+
+          <div class="page-decoration right-heart">♥</div>
+
+          <div class="right-title">
+            Happy Teacher's Day
+            <span>❤️</span>
+          </div>
+
+         
+
+          <div class="divider"></div>
+          <br>
+           <div
+            class="env-hint"
+            id="envHint">
+            tap the little photo peeking out 👇
+          </div>
+          <!-- Envelope + Photo -->
+
+          <div class="photo-stage" id="photoStage">
+
+            <div class="simple-envelope">
+
+              <!-- Photo -->
+              <div class="photo-peek" id="photoPeek">
+                <img
+                  src="./assets/thomas.jpeg"
+                  alt="Photo"
+                >
+              </div>
+
+              <!-- Envelope -->
+              <div class="envelope-body">
+
+                <div class="envelope-flap"></div>
+
+                <div class="envelope-fold left-fold"></div>
+
+                <div class="envelope-fold right-fold"></div>
+
+              </div>
+
+            </div>
+
+            <!-- Hearts -->
+            <div
+              class="burst-layer"
+              id="burstLayer">
+            </div>
+
+          </div>
+
+          
+
+
+          <!-- Personal message -->
+
+          
+
+          <!-- Signature -->
+
+          <div class="sign-final">
+            <div class="sign-small">
+              love you....
+            </div>
+
+            <div class="sign-name">
+              — your girlfriend 🩷
+            </div>
+          </div>
+
+
+          <!-- Close -->
+
+          <button class="back-btn" id="closeBtn">
+            ← Close Card
+          </button>
+          <div class="footimage">
+          <img src="./assets/class.png" alt="">
+           </div>
+        </section>
+
+      </div>
+
+    </div>
+
+  </main>
+
+
+  <!-- =====================================
+       JAVASCRIPT
+  ====================================== -->
+
+  <script>
+
+    const frontCard = document.getElementById("frontCard");
+    const openBtn = document.getElementById("openBtn");
+    const closeBtn = document.getElementById("closeBtn");
+
+    const photoStage = document.getElementById("photoStage");
+    const photoPeek = document.getElementById("photoPeek");
+    const envHint = document.getElementById("envHint");
+    const burstLayer = document.getElementById("burstLayer");
+
+
+    /* ==============================
+       OPEN CARD
+    ============================== */
+
+    openBtn.addEventListener("click", function () {
+
+      document.body.classList.add("card-open");
+
+    });
+
+
+    /* ==============================
+       CLOSE CARD
+    ============================== */
+
+    closeBtn.addEventListener("click", function () {
+
+      // Put photo back first
+      photoStage.classList.remove("popped");
+      envHint.style.opacity = "1";
+
+      // Close card
+      document.body.classList.remove("card-open");
+
+    });
+
+
+    /* ==============================
+       PHOTO CLICK
+    ============================== */
+
+    photoPeek.addEventListener("click", function () {
+
+      if (!photoStage.classList.contains("popped")) {
+
+        photoStage.classList.add("popped");
+
+        envHint.style.opacity = "0";
+
+        spawnHearts();
+
+      } else {
+
+        photoStage.classList.remove("popped");
+
+        envHint.style.opacity = "1";
+
+      }
+
+    });
+
+
+    /* ==============================
+       HEART BURST
+    ============================== */
+
+    function spawnHearts() {
+
+      const glyphs = [
+        "❤",
+        "❤",
+        "💕",
+        "💗",
+        "💖",
+        "✨"
+      ];
+
+
+      for (let i = 0; i < 45; i++) {
+
+        const heart = document.createElement("span");
+
+        heart.className = "burst-item";
+
+        heart.textContent =
+          glyphs[
+            Math.floor(
+              Math.random() * glyphs.length
+            )
+          ];
+
+
+        const angle =
+          Math.random() * Math.PI * 2;
+
+
+        const distance =
+          120 + Math.random() * 220;
+
+
+        heart.style.setProperty(
+          "--dx",
+          Math.cos(angle) * distance + "px"
+        );
+
+
+        heart.style.setProperty(
+          "--dy",
+          Math.sin(angle) * distance + "px"
+        );
+
+
+        heart.style.fontSize =
+          (16 + Math.random() * 22) + "px";
+
+
+        heart.style.animationDelay =
+          Math.random() * 0.25 + "s";
+
+
+        burstLayer.appendChild(heart);
+
+
+        setTimeout(() => {
+          heart.remove();
+        }, 1500);
+
+      }
+
+    }
+
+  </script>
+
+</body>
+</html>

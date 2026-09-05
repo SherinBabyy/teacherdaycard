@@ -1,0 +1,1102 @@
+:root {
+  --bg: #E7E3DA;
+  --paper: #fdfdfb;
+  --ink: #252525;
+  --heart: #c23b32;
+  --heart-deep: #a02f27;
+  --soft-pink: #f5d9d5;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  background: var(--bg);
+  font-family: "Quicksand", sans-serif;
+  color: var(--ink);
+}
+
+
+/* =========================================
+   SCENE
+========================================= */
+
+.scene {
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 20px;
+
+  overflow: hidden;
+}
+
+
+/* =========================================
+   CARD WRAPPER
+
+   Always keeps the card centered.
+========================================= */
+
+.card-wrapper {
+  position: relative;
+
+  width: 480px;
+  height: 650px;
+
+  perspective: 1800px;
+
+  transition: width 1.2s ease;
+}
+
+
+/* =========================================
+   WHEN OPEN
+
+   Give room for the two inside pages.
+========================================= */
+
+.card-open .card-wrapper {
+  width: 960px;
+}
+
+
+/* =========================================
+   FRONT COVER
+
+   CLOSED:
+   exactly 480 x 650
+========================================= */
+
+.front-card {
+  position: absolute;
+
+  width: 480px;
+  height: 650px;
+
+  left: 0;
+  top: 0;
+
+  z-index: 20;
+
+  background: var(--paper);
+
+  border: 1.5px solid #222;
+
+  border-radius: 6px;
+
+  padding: 35px 35px 25px;
+
+  text-align: center;
+
+  box-shadow:
+    8px 8px 0 rgba(0, 0, 0, 0.08);
+
+  transform-origin: left center;
+
+  transform:
+    rotateY(0deg);
+
+  transform-style: preserve-3d;
+
+  transition:
+    transform 1.2s cubic-bezier(.65, 0, .35, 1);
+
+  overflow: hidden;
+
+  backface-visibility: hidden;
+}
+
+
+/* =========================================
+   OPEN FRONT COVER
+
+   It flips away to the left.
+========================================= */
+
+.card-open .front-card {
+
+  transform:
+    translateX(-480px)
+    rotateY(-180deg);
+
+  pointer-events: none;
+}
+
+
+/* =========================================
+   INSIDE CARD
+
+   CLOSED = completely hidden
+========================================= */
+
+.inside-card {
+  position: absolute;
+
+  width: 960px;
+  height: 650px;
+
+  left: 0;
+  top: 0;
+
+  display: flex;
+
+  background: var(--paper);
+
+  border-radius: 6px;
+
+  box-shadow:
+    0 20px 40px -18px rgba(0, 0, 0, .4);
+
+  opacity: 0;
+
+  visibility: hidden;
+
+  pointer-events: none;
+
+  transition:
+    opacity .3s ease;
+
+  overflow: visible;
+}
+
+
+/* =========================================
+   OPEN = SHOW INSIDE
+========================================= */
+
+.card-open .inside-card {
+
+  opacity: 1;
+
+  visibility: visible;
+
+  pointer-events: auto;
+
+  transition-delay: .45s;
+}
+
+
+/* =========================================
+   INSIDE PAGES
+========================================= */
+
+.inside-page {
+  position: relative;
+
+  width: 480px;
+  height: 650px;
+
+  flex-shrink: 0;
+
+  background: var(--paper);
+
+  padding: 35px;
+
+  overflow: visible;
+}
+
+
+/* center fold */
+
+.left-page {
+
+  border-right: 1px solid #d5d0c7;
+
+  box-shadow:
+    inset -8px 0 15px rgba(0, 0, 0, .04);
+}
+
+
+.right-page {
+
+  box-shadow:
+    inset 8px 0 15px rgba(0, 0, 0, .04);
+}
+
+
+/* =========================================
+   FRONT COVER TEXT
+========================================= */
+
+.small-text {
+
+  font-family: "Caveat", cursive;
+
+  font-size: 1.4rem;
+
+  margin-bottom: 6px;
+
+  transform: rotate(-2deg);
+}
+
+
+.front-card h1 {
+
+  margin: 0;
+
+  font-family: "Caveat", cursive;
+
+  font-size: 4rem;
+
+  line-height: .88;
+
+  font-weight: 700;
+
+  transform: rotate(-2deg);
+}
+
+
+/* =========================================
+   FRONT IMAGE
+========================================= */
+
+.hug {
+
+  width: 150px;
+  height: 150px;
+
+  margin: 15px auto 0;
+
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+}
+
+
+.hug img {
+
+  width: 150px;
+  height: 150px;
+
+  object-fit: contain;
+}
+
+
+/* =========================================
+   FRONT H2
+========================================= */
+
+.front-card h2 {
+
+  margin: 4px 0;
+
+  font-family: "Caveat", cursive;
+
+  font-size: 2.55rem;
+
+  line-height: 1;
+
+  font-weight: 700;
+
+  transform: rotate(1deg);
+}
+
+
+/* =========================================
+   DIVIDER
+========================================= */
+
+.divider {
+
+  position: relative;
+
+  width: 70px;
+  height: 1px;
+
+  background: var(--heart);
+
+  margin: 9px auto;
+}
+
+
+.divider::before {
+
+  content: "❤";
+
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  transform:
+    translate(-50%, -50%);
+
+  font-size: 10px;
+
+  color: var(--heart);
+
+  background: var(--paper);
+
+  padding: 0 4px;
+}
+
+
+/* =========================================
+   OPEN BUTTON
+========================================= */
+
+.open-btn {
+
+  position: absolute;
+
+   margin-top: 30px;
+
+
+  transform:
+    translateX(-50%);
+
+  padding: 12px 25px;
+
+  background: #f8f5ed;
+
+  border: 1.5px solid #222;
+
+  border-radius: 5px;
+
+  font-family: "Quicksand", sans-serif;
+
+  font-size: 1rem;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  box-shadow:
+    4px 4px 0 #222;
+
+  white-space: nowrap;
+
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease,
+    background .2s ease;
+}
+
+
+.open-btn span {
+
+  display: inline-block;
+
+  margin-left: 8px;
+
+  font-size: 1.2rem;
+}
+
+
+.open-btn:hover {
+
+  background: var(--soft-pink);
+
+  transform:
+    translate(calc(-50% + 2px), 2px);
+
+  box-shadow:
+    2px 2px 0 #222;
+}
+
+
+/* =========================================
+   FRONT NOTE
+========================================= */
+
+.tiny-note {
+
+  position: absolute;
+
+  left: 0;
+  right: 0;
+
+  bottom: 55px;
+
+  font-family: "Caveat", cursive;
+
+  font-size: 1.2rem;
+
+  opacity: .75;
+}
+
+
+/* =========================================
+   FRONT DOODLES
+========================================= */
+
+.doodle {
+
+  position: absolute;
+
+  font-family: "Caveat", cursive;
+
+  pointer-events: none;
+}
+
+
+.star {
+
+  font-size: 2rem;
+}
+
+
+.star-1 {
+
+  top: 65px;
+  left: 50px;
+
+  transform: rotate(-15deg);
+}
+
+
+.star-2 {
+
+  top: 140px;
+  right: 50px;
+
+  transform: rotate(15deg);
+}
+
+
+.heart {
+
+  color: var(--heart);
+
+  font-size: 1.6rem;
+}
+
+
+.heart-1 {
+
+  top: 42px;
+  right: 70px;
+
+  transform: rotate(15deg);
+}
+
+
+.heart-2 {
+
+  bottom: 100px;
+  left: 60px;
+
+  transform: rotate(-15deg);
+}
+
+
+/* =========================================
+   LEFT INSIDE
+========================================= */
+
+.headline {
+
+  margin: 20px 0 0;
+
+  font-family: "Caveat", cursive;
+
+  font-weight: 700;
+
+  font-size: 2.1rem;
+
+  line-height: 1.12;
+}
+
+
+.heart-pop {
+
+  color: var(--heart);
+
+  font-size: 1.5rem;
+
+  position: relative;
+
+  top: 2px;
+}
+
+
+.left-content {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: flex-start;
+
+  margin-top: 5px;
+}
+
+
+.lines {
+
+  max-width: 62%;
+
+  font-family: "Caveat", cursive;
+
+  font-weight: 700;
+
+  font-size: 2rem;
+
+  line-height: 1.16;
+}
+
+
+.heart-inline {
+
+  color: var(--heart);
+}
+
+
+.math-col {
+
+  text-align: right;
+
+  padding-top: 4px;
+}
+
+
+.math {
+
+  font-family: "Caveat", cursive;
+
+  font-weight: 600;
+
+  font-size: 1.15rem;
+
+  line-height: 1.55;
+}
+
+
+/* =========================================
+   ROBOT
+========================================= */
+
+.robot {
+
+  display: block;
+
+  width: 330px;
+
+  max-width: 100%;
+
+  height: auto;
+
+  margin: 18px auto 0;
+}
+
+
+/* =========================================
+   LEFT BOTTOM
+========================================= */
+
+.left-bottom {
+
+  display: flex;
+
+  justify-content: center;
+
+  gap: 15px;
+
+  margin-top: 10px;
+
+  font-family: "Caveat", cursive;
+
+  font-size: 1.15rem;
+
+  color: #6f6a61;
+}
+
+
+/* =========================================
+   PAGE DECORATIONS
+========================================= */
+
+.page-decoration {
+
+  position: absolute;
+
+  font-size: 1.8rem;
+}
+
+
+.left-star {
+
+  right: 35px;
+  top: 35px;
+
+  color: #6f6a61;
+}
+
+
+.right-heart {
+
+  right: 40px;
+  top: 30px;
+
+  color: var(--heart);
+}
+
+
+/* =========================================
+   RIGHT TITLE
+========================================= */
+
+.right-title {
+
+  margin-top: 20px;
+    margin-bottom: 0;
+
+  text-align: center;
+
+  font-family: "Caveat", cursive;
+
+  font-size: 2.2rem;
+
+  font-weight: 700;
+}
+
+
+.right-title span {
+
+  font-size: 1.5rem;
+}
+
+
+/* =========================================
+   PHOTO STAGE
+
+   SMALL GAP FROM HEADING
+========================================= */
+
+.photo-stage {
+  position: relative;
+
+  width: 300px;
+
+  height: 250px;
+
+  margin: -60px auto 0;
+
+  overflow: visible;
+}
+
+
+/* =========================================
+   ENVELOPE
+========================================= */
+
+.simple-envelope {
+
+  position: absolute;
+
+  width: 100px;
+  height: 55px;
+
+  left: 50%;
+
+  bottom: 5px;
+
+  transform:
+    translateX(-50%)
+    rotate(-1deg);
+
+  z-index: 3;
+}
+
+
+.envelope-body {
+
+  position: absolute;
+
+  left: 0;
+  bottom: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background: #f8f5ed;
+
+  border: 1.5px solid #2b2b2b;
+
+  border-radius: 3px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 5px 10px rgba(0, 0, 0, .15);
+
+  z-index: 4;
+}
+
+
+.envelope-flap {
+
+  position: absolute;
+
+  width: 72px;
+  height: 72px;
+
+  left: 50%;
+  top: -36px;
+
+  transform:
+    translateX(-50%)
+    rotate(45deg);
+
+  background: #f8f5ed;
+
+  border-right: 1.5px solid #2b2b2b;
+
+  border-bottom: 1.5px solid #2b2b2b;
+
+  z-index: 5;
+}
+
+
+.envelope-fold {
+
+  position: absolute;
+
+  width: 72px;
+  height: 72px;
+
+  bottom: -40px;
+
+  background: #eee9df;
+
+  transform: rotate(45deg);
+
+  z-index: 2;
+}
+
+
+.left-fold {
+  left: -40px;
+}
+
+
+.right-fold {
+  right: -40px;
+}
+
+
+/* =========================================
+   PHOTO PEEK
+========================================= */
+
+.photo-peek {
+
+  position: absolute;
+
+  width: 72px;
+  height: 88px;
+
+  left: 50%;
+
+  bottom: -10px;
+
+  transform:
+    translateX(-50%)
+    rotate(-4deg);
+
+  background: white;
+
+  padding: 4px;
+
+  border: 1px solid #222;
+
+  clip-path:
+    inset(0 0 65px 0);
+
+  cursor: pointer;
+
+  z-index: 6;
+
+  transition:
+    width .8s ease,
+    height .8s ease,
+    bottom .8s cubic-bezier(.2, .8, .2, 1),
+    transform .8s cubic-bezier(.2, .8, .2, 1),
+    box-shadow .5s ease;
+}
+
+
+.photo-peek img {
+
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+
+/* =========================================
+   POP PHOTO
+========================================= */
+.photo-stage.popped .photo-peek {
+  width: 270px;
+  height: 340px;
+
+  bottom: 0;
+
+  transform:
+    translateX(-50%)
+    translateY(-25px)
+    rotate(0deg);
+
+  clip-path: none;
+
+  z-index: 100;
+
+  box-shadow:
+    0 25px 45px rgba(0, 0, 0, .3);
+}
+
+
+
+/* =========================================
+   HEART BURST
+========================================= */
+
+.burst-layer {
+
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  width: 1px;
+  height: 1px;
+
+  pointer-events: none;
+
+  z-index: 200;
+}
+
+
+.burst-item {
+
+  position: absolute;
+
+  left: 0;
+  top: 0;
+
+  color: var(--heart);
+
+  animation:
+    heartBurst 1.2s ease-out forwards;
+}
+
+
+@keyframes heartBurst {
+
+  0% {
+
+    transform:
+      translate(-50%, -50%)
+      scale(.2);
+
+    opacity: 1;
+  }
+
+  100% {
+
+    transform:
+      translate(
+        calc(-50% + var(--dx)),
+        calc(-50% + var(--dy))
+      )
+      scale(1.3);
+
+    opacity: 0;
+  }
+}
+
+
+/* =========================================
+   HINT
+========================================= */
+
+.env-hint {
+
+  text-align: center;
+
+  font-family: "Caveat", cursive;
+
+  font-size: 16px;
+
+  color: #6f6a61;
+
+  margin-top: -20px;
+
+  transition:
+    opacity .4s ease;
+}
+
+
+/* =========================================
+   PERSONAL MESSAGE
+========================================= */
+
+.personal-message {
+
+  text-align: center;
+
+  margin-top: 14px;
+
+  font-family: "Caveat", cursive;
+
+  font-size: 1.4rem;
+
+  line-height: 1.1;
+
+  color: #6f6a61;
+}
+
+
+.personal-message .thomas {
+
+  color: var(--ink);
+
+  font-family: "Caveat", cursive;
+
+  font-size: 1.9rem;
+
+  font-weight: 700;
+
+  margin-top: 3px;
+}
+
+
+/* =========================================
+   SIGNATURE
+========================================= */
+
+.sign-final {
+
+  text-align: center;
+
+  margin-top: 12px;
+}
+
+
+.sign-small {
+
+  font-family: "Caveat", cursive;
+
+  font-size: 1.15rem;
+
+  color: #6f6a61;
+}
+
+
+.sign-name {
+
+  font-family: "Caveat", cursive;
+
+  font-size: 2rem;
+
+  color: var(--heart-deep);
+
+  margin-top: 2px;
+}
+
+
+/* =========================================
+   CLOSE
+========================================= */
+
+.back-btn {
+
+  display: block;
+
+  margin: 8px auto 0;
+
+  padding: 3px 8px;
+
+  background: transparent;
+
+  border: none;
+
+  border-bottom: 1px solid #252525;
+
+  color: #252525;
+
+  font-family: "Caveat", cursive;
+
+  font-size: 1.3rem;
+
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 1000px) {
+
+  .card-open .card-wrapper {
+    transform:
+      scale(.8);
+
+    transform-origin:
+      center center;
+  }
+
+}
+
+
+@media (max-width: 520px) {
+
+  .scene {
+    padding: 10px;
+  }
+
+  .card-wrapper {
+    transform:
+      scale(.75);
+
+    transform-origin:
+      center center;
+  }
+ .scene {
+    padding: 10px;
+  }
+
+  .card-wrapper {
+    transform:
+      scale(.75);
+
+    transform-origin:
+      center center;
+  }
+
+  .card-open .card-wrapper {
+    transform:
+      scale(.55);
+
+    transform-origin:
+      center center;
+  }
+
+}
+  
+
+.footimage{
+    display: flex;
+    justify-content: center;
+   
+    height:150px;
+   
+}
